@@ -13,6 +13,11 @@ import prodSetCream1 from '@assets/1000280945_1768329375976.jpg';
 import prodSetCream2 from '@assets/1000280946_1768329375977.jpg';
 import prodSetBlue1 from '@assets/1000280948_1768329375978.jpg';
 
+// New images for Tie-Dye Lounge Set (Cream)
+import prodSetCream3 from '@assets/IMG-20260113-WA0379(1)_1768331516354.jpg';
+import prodSetCream4 from '@assets/IMG-20260113-WA0395_1768331516356.jpg';
+import prodSetCream5 from '@assets/IMG-20260113-WA0373(1)_1768331516357.jpg';
+
 // Exporting the best hero image directly
 export const MAIN_HERO_IMAGE = heroImg1;
 
@@ -79,7 +84,7 @@ export const PRODUCTS = [
     category: "Streetwear",
     collection: "Clean Aesthetic",
     image: prodSetCream2,
-    images: [prodSetCream1, prodSetCream2],
+    images: [prodSetCream1, prodSetCream2, prodSetCream3, prodSetCream4, prodSetCream5],
     isNew: true,
   },
   {
