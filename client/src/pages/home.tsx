@@ -4,6 +4,7 @@ import { About } from "@/components/sections/About";
 import { Collections } from "@/components/sections/Collections";
 import { ProductGrid } from "@/components/sections/ProductGrid";
 import { Footer } from "@/components/sections/Footer";
+import { CartDrawer } from "@/components/layout/CartDrawer";
 import { MAIN_HERO_IMAGE } from "@/lib/data";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <Collections />
       <ProductGrid />
       <Footer />
+      <CartDrawer />
     </div>
   );
 }

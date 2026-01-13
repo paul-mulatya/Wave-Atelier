@@ -5,14 +5,24 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/lib/cart";
 
 export function ProductGrid() {
   const [selectedProduct, setSelectedProduct] = useState<null | typeof PRODUCTS[0]>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { addItem, setIsOpen } = useCart();
 
   const openProduct = (product: typeof PRODUCTS[0]) => {
     setSelectedProduct(product);
     setCurrentImageIndex(0);
+  };
+
+  const handleAddToCart = () => {
+    if (selectedProduct) {
+      addItem(selectedProduct);
+      setSelectedProduct(null);
+      setIsOpen(true);
+    }
   };
 
   const nextImage = () => {
@@ -149,7 +159,10 @@ export function ProductGrid() {
             </div>
 
             <div className="mt-auto pt-8 space-y-4">
-              <Button className="w-full rounded-none h-14 bg-primary text-white hover:bg-primary/90 uppercase tracking-widest text-xs font-bold">
+              <Button 
+                className="w-full rounded-none h-14 bg-primary text-white hover:bg-primary/90 uppercase tracking-widest text-xs font-bold"
+                onClick={handleAddToCart}
+              >
                 Add to Cart
               </Button>
               <Button variant="outline" className="w-full rounded-none h-14 uppercase tracking-widest text-xs font-bold">
