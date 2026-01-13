@@ -7,29 +7,16 @@ import prodDress2 from '@assets/1000280939_1768329361257.jpg';
 
 import prodDenim1 from '@assets/1000280940_1768329361258.jpg';
 import prodDenim2 from '@assets/1000280941_1768329361259.jpg';
-import prodDenim3 from '@assets/IMG-20260113-WA0340_1768332737058.jpg';
-import prodDenim4 from '@assets/IMG-20260113-WA0336_1768332737060.jpg';
 
-import prodHoodie1 from '@assets/1000280950_1768332737065.jpg';
-import prodHoodie2 from '@assets/IMG-20260113-WA0403_1768332737055.jpg';
-import prodHoodie3 from '@assets/IMG-20260113-WA0401_1768332737057.jpg';
-import prodHoodie4 from '@assets/IMG-20260113-WA0405(1)_1768332737058.jpg';
-import prodHoodie5 from '@assets/IMG-20260113-WA0370_1768332737059.jpg';
-import prodHoodie6 from '@assets/IMG-20260113-WA0407_1768332737060.jpg';
-import prodHoodie7 from '@assets/IMG-20260113-WA0405_1768332737061.jpg';
-
-import prodSetCream1 from '@assets/1000280945_1768332737065.jpg';
+import prodHoodie1 from '@assets/1000280950_1768329375979.jpg';
+import prodSetCream1 from '@assets/1000280945_1768329375976.jpg';
 import prodSetCream2 from '@assets/1000280946_1768329375977.jpg';
+import prodSetBlue1 from '@assets/1000280948_1768329375978.jpg';
+
+// New images for Tie-Dye Lounge Set (Cream)
 import prodSetCream3 from '@assets/IMG-20260113-WA0379(1)_1768331516354.jpg';
 import prodSetCream4 from '@assets/IMG-20260113-WA0395_1768331516356.jpg';
 import prodSetCream5 from '@assets/IMG-20260113-WA0373(1)_1768331516357.jpg';
-
-import prodSetBlue1 from '@assets/1000280948_1768332737065.jpg';
-import prodSetBlue2 from '@assets/IMG-20260113-WA0399_1768332737062.jpg';
-import prodSetBlue3 from '@assets/IMG-20260113-WA0391_1768332737063.jpg';
-import prodSetBlue4 from '@assets/IMG-20260113-WA0389_1768332737064.jpg';
-import prodSetBlue5 from '@assets/IMG-20260113-WA0383_1768332737065.jpg';
-import prodSetBlue6 from '@assets/IMG-20260113-WA0381_1768332737065.jpg';
 
 // Exporting the best hero image directly
 export const MAIN_HERO_IMAGE = heroImg1;
@@ -66,7 +53,7 @@ export const PRODUCTS = [
     price: 4500,
     category: "Dresses",
     collection: "Clean Aesthetic",
-    image: heroImg2,
+    image: heroImg2, // Changed to the one with bag for variety in grid
     images: [heroImg1, heroImg2, heroImg3],
     isNew: true,
   },
@@ -77,7 +64,7 @@ export const PRODUCTS = [
     category: "Sets",
     collection: "Vintage Revival",
     image: prodDenim2,
-    images: [prodDenim1, prodDenim2, prodDenim3, prodDenim4],
+    images: [prodDenim1, prodDenim2],
     isNew: true,
   },
   {
@@ -107,7 +94,7 @@ export const PRODUCTS = [
     category: "Streetwear",
     collection: "Clean Aesthetic",
     image: prodSetBlue1,
-    images: [prodSetBlue1, prodSetBlue2, prodSetBlue3, prodSetBlue4, prodSetBlue5, prodSetBlue6],
+    images: [prodSetBlue1],
     isNew: false,
   },
   {
@@ -117,7 +104,7 @@ export const PRODUCTS = [
     category: "Streetwear",
     collection: "Clean Aesthetic",
     image: prodHoodie1,
-    images: [prodHoodie1, prodHoodie2, prodHoodie3, prodHoodie4, prodHoodie5, prodHoodie6, prodHoodie7],
+    images: [prodHoodie1],
     isNew: false,
   },
 ];
