@@ -28,7 +28,10 @@ export function Collections() {
               transition={{ delay: index * 0.2 }}
             >
               <Card className="group overflow-hidden border-none rounded-none shadow-none bg-transparent">
-                <CardContent className="p-0 relative aspect-[3/4] overflow-hidden cursor-pointer">
+                <CardContent 
+                  className="p-0 relative aspect-[3/4] overflow-hidden cursor-pointer"
+                  onClick={() => document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors z-10 duration-500" />
                   <img
                     src={collection.image}

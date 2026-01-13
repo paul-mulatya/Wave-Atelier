@@ -39,14 +39,16 @@ export function Hero({ image }: HeroProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="bg-white text-black hover:bg-white/90 rounded-none px-8 py-6 text-base tracking-widest uppercase"
+              className="bg-white text-black hover:bg-white/90 rounded-none px-8 py-6 text-base tracking-widest uppercase cursor-pointer"
+              asChild
             >
-              Shop Collection
+              <a href="#shop">Shop Collection</a>
             </Button>
             <Button 
               size="lg" 
               variant="outline"
-              className="border-white text-white hover:bg-white/10 hover:text-white hover:border-white rounded-none px-8 py-6 text-base tracking-widest uppercase"
+              className="border-white text-white hover:bg-white/10 hover:text-white hover:border-white rounded-none px-8 py-6 text-base tracking-widest uppercase cursor-pointer"
+              onClick={() => document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' })}
             >
               View Lookbook
             </Button>
