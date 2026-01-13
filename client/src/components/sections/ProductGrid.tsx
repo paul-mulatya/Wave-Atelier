@@ -10,16 +10,18 @@ import { useCart } from "@/lib/cart";
 export function ProductGrid() {
   const [selectedProduct, setSelectedProduct] = useState<null | typeof PRODUCTS[0]>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [selectedSize, setSelectedSize] = useState<string>("M");
   const { addItem, setIsOpen } = useCart();
 
   const openProduct = (product: typeof PRODUCTS[0]) => {
     setSelectedProduct(product);
     setCurrentImageIndex(0);
+    setSelectedSize("M");
   };
 
   const handleAddToCart = () => {
     if (selectedProduct) {
-      addItem(selectedProduct);
+      addItem(selectedProduct, selectedSize);
       setSelectedProduct(null);
       setIsOpen(true);
     }
@@ -155,6 +157,25 @@ export function ProductGrid() {
                   <li>• Hand-finished detailing</li>
                   <li>• Relaxed fit for modern comfort</li>
                 </ul>
+
+                <div className="pt-6">
+                  <p className="text-xs uppercase tracking-widest mb-3">Select Size</p>
+                  <div className="flex gap-2">
+                    {["S", "M", "L", "XL"].map((size) => (
+                      <button
+                        key={size}
+                        onClick={() => setSelectedSize(size)}
+                        className={`w-10 h-10 border text-xs font-bold transition-colors ${
+                          selectedSize === size
+                            ? "bg-primary text-white border-primary"
+                            : "border-border/60 hover:border-primary"
+                        }`}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 

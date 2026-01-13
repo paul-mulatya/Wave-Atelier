@@ -5,11 +5,28 @@ import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 
+import { BRAND } from "@/lib/data";
+
 export function CartDrawer() {
   const { items, isOpen, setIsOpen, updateQuantity, removeItem } = useCart();
 
   const itemCount = items.reduce((acc: number, item: CartItem) => acc + item.quantity, 0);
   const total = getCartTotal(items);
+
+  const handleCheckout = () => {
+    const phoneNumber = BRAND.phone.replace(/\D/g, "");
+    let message = "Hello Wave Kenya, I would like to place an order:\n\n";
+    
+    items.forEach((item) => {
+      message += `${item.product.name}${item.size ? ` (Size: ${item.size})` : ""} x ${item.quantity}\n`;
+    });
+    
+    message += `\nTotal: KES ${total.toLocaleString()}\n\n`;
+    message += "Please let me know how to proceed with payment and delivery.";
+    
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
+  };
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -48,7 +65,15 @@ export function CartDrawer() {
                   <div className="flex-1 flex flex-col justify-between py-1">
                     <div>
                       <h4 className="font-serif text-lg leading-tight mb-1">{item.product.name}</h4>
-                      <p className="text-xs text-muted-foreground uppercase tracking-widest">{item.product.collection}</p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="text-xs text-muted-foreground uppercase tracking-widest">{item.product.collection}</p>
+                        {item.size && (
+                          <>
+                            <span className="text-[10px] text-muted-foreground/40">•</span>
+                            <span className="text-[10px] font-bold text-primary">SIZE {item.size}</span>
+                          </>
+                        )}
+                      </div>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center border border-border/60">
@@ -93,7 +118,10 @@ export function CartDrawer() {
             <p className="text-[10px] text-muted-foreground/60 text-center uppercase tracking-tighter">
               Shipping and taxes calculated at checkout
             </p>
-            <Button className="w-full rounded-none h-14 bg-primary text-white hover:bg-primary/90 uppercase tracking-widest text-xs font-bold">
+            <Button 
+              className="w-full rounded-none h-14 bg-primary text-white hover:bg-primary/90 uppercase tracking-widest text-xs font-bold"
+              onClick={handleCheckout}
+            >
               Proceed to Checkout
             </Button>
           </SheetFooter>

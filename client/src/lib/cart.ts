@@ -6,13 +6,14 @@ export type Product = typeof PRODUCTS[0];
 export type CartItem = {
   product: Product;
   quantity: number;
+  size?: string;
 };
 
 interface CartStore {
   items: CartItem[];
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
-  addItem: (product: Product) => void;
+  addItem: (product: Product, size?: string) => void;
   removeItem: (productId: number) => void;
   updateQuantity: (productId: number, delta: number) => void;
   clearCart: () => void;
@@ -22,17 +23,17 @@ export const useCart = create<CartStore>((set) => ({
   items: [],
   isOpen: false,
   setIsOpen: (open: boolean) => set({ isOpen: open }),
-  addItem: (product: Product) => {
+  addItem: (product: Product, size?: string) => {
     set((state) => {
-      const existingItem = state.items.find((i) => i.product.id === product.id);
+      const existingItem = state.items.find((i) => i.product.id === product.id && i.size === size);
       if (existingItem) {
         return {
           items: state.items.map((i) =>
-            i.product.id === product.id ? { ...i, quantity: i.quantity + 1 } : i
+            (i.product.id === product.id && i.size === size) ? { ...i, quantity: i.quantity + 1 } : i
           ),
         };
       }
-      return { items: [...state.items, { product, quantity: 1 }] };
+      return { items: [...state.items, { product, quantity: 1, size }] };
     });
   },
   removeItem: (productId: number) =>
