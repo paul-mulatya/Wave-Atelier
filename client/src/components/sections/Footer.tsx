@@ -41,14 +41,27 @@ export function Footer() {
           <div className="space-y-6">
             <h4 className="font-serif text-xl">Follow Us</h4>
             <div className="flex gap-4">
-              <a href="#" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors">
+              <a href="#" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" title="Instagram">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors">
-                <Facebook className="w-5 h-5" />
+              <a href="#" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" title="TikTok">
+                <svg 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  className="w-5 h-5"
+                >
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                </svg>
               </a>
-              <a href="#" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors">
+              <a href="#" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" title="Twitter">
                 <Twitter className="w-5 h-5" />
+              </a>
+              <a href="#" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" title="Facebook">
+                <Facebook className="w-5 h-5" />
               </a>
             </div>
             

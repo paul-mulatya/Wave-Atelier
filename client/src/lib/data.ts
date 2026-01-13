@@ -22,6 +22,7 @@ export const BRAND = {
   phone: "+254 759 556 794",
   address: "Nairobi Kenya",
   instagram: "@The_wave.kenya",
+  tiktok: "@The_wave.kenya",
   description: "Modern street luxury. Rooted in authenticity and crafted with precision.",
 };
 
