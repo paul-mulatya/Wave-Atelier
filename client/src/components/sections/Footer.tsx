@@ -30,6 +30,17 @@ export function Footer() {
                   <a href={`tel:${BRAND.phone}`} className="hover:text-white transition-colors">{BRAND.phone}</a>
                 </p>
                 <p className="flex items-center gap-2">
+                  <span className="uppercase text-xs tracking-widest w-16 opacity-50">WhatsApp</span>
+                  <a 
+                    href={`https://wa.me/${BRAND.phone.replace(/\D/g, '')}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-white transition-colors flex items-center gap-1"
+                  >
+                    Chat with us
+                  </a>
+                </p>
+                <p className="flex items-center gap-2">
                   <span className="uppercase text-xs tracking-widest w-16 opacity-50">Visit</span>
                   <span>{BRAND.address}</span>
                 </p>
