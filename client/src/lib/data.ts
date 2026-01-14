@@ -45,7 +45,9 @@ import prodBrownMini2 from '@assets/1000284341_1768421766872.jpg';
 import prodLuxuryDenimSet from '@assets/IMG-20260113-WA0409(1)_1768421855154.jpg';
 
 // New Blue Mbisu Tunic
-import prodMbisuBlue from '@assets/stock_images/blue_tunic_dress_afr_4bac89bc.jpg';
+import prodMbisuBlue1 from '@assets/IMG-20260114-WA0481_1768423819736.jpg';
+import prodMbisuBlue2 from '@assets/IMG-20260114-WA0482_1768423819737.jpg';
+import prodMbisuBlue3 from '@assets/IMG-20260114-WA0483_1768423819738.jpg';
 
 // Signature Denim Set extra images
 import prodDenim3 from '@assets/IMG-20260113-WA0340_1768332934220.jpg';
@@ -80,26 +82,6 @@ export const COLLECTIONS = [
 ];
 
 export const PRODUCTS = [
-  {
-    id: 1,
-    name: "Terracotta Kaftan Maxi",
-    price: 4500,
-    category: "Dresses",
-    collection: "Clean Aesthetic",
-    image: heroImg2,
-    images: [heroImg1, heroImg2, heroImg3],
-    isNew: true,
-  },
-  {
-    id: 2,
-    name: "Signature Denim Set",
-    price: 6500,
-    category: "Sets",
-    collection: "Vintage Revival",
-    image: prodDenim2,
-    images: [prodDenim1, prodDenim2, prodDenim3, prodDenim4],
-    isNew: true,
-  },
   {
     id: 7,
     name: "Earth-Tone Maxi Dress",
@@ -155,20 +137,10 @@ export const PRODUCTS = [
     discountPrice: 3315,
     category: "Dresses",
     collection: "Clean Aesthetic",
-    image: prodMbisuBlue,
-    images: [prodMbisuBlue],
+    image: prodMbisuBlue1,
+    images: [prodMbisuBlue1, prodMbisuBlue2, prodMbisuBlue3],
     isNew: true,
     onOffer: true,
-  },
-  {
-    id: 4,
-    name: "Tie-Dye Lounge Set (Cream)",
-    price: 5500,
-    category: "Streetwear",
-    collection: "Clean Aesthetic",
-    image: prodSetCream2,
-    images: [prodSetCream1, prodSetCream2, prodSetCream3, prodSetCream4, prodSetCream5],
-    isNew: true,
   },
   {
     id: 5,
@@ -193,6 +165,36 @@ export const PRODUCTS = [
     images: [prodSetBlue4, prodSetBlue5, prodSetBlue1, prodSetBlue2, prodSetBlue3, prodSetBlue6],
     isNew: false,
     onOffer: true,
+  },
+  {
+    id: 1,
+    name: "Terracotta Kaftan Maxi",
+    price: 4500,
+    category: "Dresses",
+    collection: "Clean Aesthetic",
+    image: heroImg2,
+    images: [heroImg1, heroImg2, heroImg3],
+    isNew: true,
+  },
+  {
+    id: 2,
+    name: "Signature Denim Set",
+    price: 6500,
+    category: "Sets",
+    collection: "Vintage Revival",
+    image: prodDenim2,
+    images: [prodDenim1, prodDenim2, prodDenim3, prodDenim4],
+    isNew: true,
+  },
+  {
+    id: 4,
+    name: "Tie-Dye Lounge Set (Cream)",
+    price: 5500,
+    category: "Streetwear",
+    collection: "Clean Aesthetic",
+    image: prodSetCream2,
+    images: [prodSetCream1, prodSetCream2, prodSetCream3, prodSetCream4, prodSetCream5],
+    isNew: true,
   },
   {
     id: 6,
