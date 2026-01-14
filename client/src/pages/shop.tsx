@@ -1,26 +1,28 @@
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PRODUCTS } from "@/lib/data";
+import { PRODUCTS, Product } from "@/lib/data";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/sections/Footer";
+import { CartDrawer } from "@/components/layout/CartDrawer";
+import { useCart } from "@/lib/cart";
 import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/lib/cart";
-import { Link } from "wouter";
 
-export function ProductGrid() {
-    const [selectedProduct, setSelectedProduct] = useState<null | typeof PRODUCTS[0]>(null);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [isMobileViewingImages, setIsMobileViewingImages] = useState(false);
-    const [selectedSize, setSelectedSize] = useState<string>("M");
-    const { addItem, setIsOpen } = useCart();
-  
-    const openProduct = (product: typeof PRODUCTS[0]) => {
-      setSelectedProduct(product);
-      setCurrentImageIndex(0);
-      setIsMobileViewingImages(false);
-      setSelectedSize(product.availableSizes ? product.availableSizes[0] : "M");
-    };
+export default function ShopPage() {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMobileViewingImages, setIsMobileViewingImages] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<string>("M");
+  const { addItem, setIsOpen } = useCart();
+
+  const openProduct = (product: Product) => {
+    setSelectedProduct(product);
+    setCurrentImageIndex(0);
+    setIsMobileViewingImages(false);
+    setSelectedSize(product.availableSizes ? product.availableSizes[0] : "M");
+  };
 
   const handleAddToCart = () => {
     if (selectedProduct) {
@@ -41,87 +43,78 @@ export function ProductGrid() {
   };
 
   return (
-    <section id="shop" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
-          <div className="max-w-xl">
-            <h2 className="font-serif text-4xl mb-4 text-left">Our Collection</h2>
-            <p className="text-muted-foreground font-light text-sm italic">Modern African Luxury</p>
-          </div>
-          <Link href="/shop">
-            <Button variant="link" className="text-primary p-0 h-auto font-bold uppercase tracking-[0.2em] text-[10px] group md:hidden">
-              View Entire Shop <ChevronRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-        </div>
-        
-        {/* Horizontal scroll on mobile, grid on desktop */}
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-8 md:pb-0 scrollbar-hide snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0">
-          {PRODUCTS.map((product, idx) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className={`group cursor-pointer min-w-[280px] md:min-w-0 snap-start ${idx >= 4 ? 'hidden md:block' : 'block'}`}
-              onClick={() => openProduct(product)}
-            >
-              <div className="relative aspect-[3/4] mb-4 overflow-hidden bg-secondary">
-                {product.isNew && !product.onOffer && !product.status && (
-                  <Badge className="absolute top-4 left-4 z-10 bg-primary text-white hover:bg-primary rounded-none tracking-widest text-[10px] py-1 px-3 uppercase">
-                    New Arrival
-                  </Badge>
-                )}
-                {product.onOffer && !product.status && (
-                  <Badge className="absolute top-4 left-4 z-10 bg-primary text-white hover:bg-primary rounded-none tracking-widest text-[10px] py-1 px-3 uppercase">
-                    15% OFF
-                  </Badge>
-                )}
-                {product.status && (
-                  <Badge className="absolute top-4 left-4 z-10 bg-black/80 text-white hover:bg-black/80 rounded-none tracking-widest text-[10px] py-1 px-3 uppercase">
-                    {product.status}
-                  </Badge>
-                )}
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="text-left px-2">
-                <p className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">
-                  {product.collection}
-                </p>
-                <h3 className="font-serif text-base text-foreground mb-1 group-hover:text-primary transition-colors">
-                  {product.name}
-                </h3>
-                <div className="flex items-center gap-3">
-                  {product.onOffer ? (
-                    <>
-                      <span className="text-xs text-muted-foreground line-through">
+    <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden">
+      <Navbar />
+      
+      <main className="pt-32 pb-20">
+        <div className="container mx-auto px-4">
+          <header className="mb-20 text-center">
+            <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs mb-4 block">
+              The Full Experience
+            </span>
+            <h1 className="font-serif text-5xl md:text-7xl mb-6 text-primary">Our Collection</h1>
+            <p className="text-muted-foreground font-light text-xl max-w-2xl mx-auto italic">
+              Modern African Luxury
+            </p>
+          </header>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+            {PRODUCTS.map((product, idx) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.05 }}
+                className="group cursor-pointer"
+                onClick={() => openProduct(product)}
+              >
+                <div className="relative aspect-[3/4] overflow-hidden bg-secondary mb-4">
+                  {product.status && (
+                    <Badge className="absolute top-2 left-2 z-10 bg-black/80 text-white rounded-none tracking-widest text-[8px] py-1 px-2 uppercase">
+                      {product.status}
+                    </Badge>
+                  )}
+                  {product.onOffer && !product.status && (
+                    <Badge className="absolute top-2 left-2 z-10 bg-primary text-white rounded-none tracking-widest text-[8px] py-1 px-2 uppercase">
+                      15% OFF
+                    </Badge>
+                  )}
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+                
+                <div className="text-left px-1">
+                  <h3 className="font-serif text-sm md:text-lg mb-1 group-hover:text-primary transition-colors line-clamp-1">{product.name}</h3>
+                  <div className="flex items-center gap-2">
+                    {product.onOffer ? (
+                      <>
+                        <span className="text-muted-foreground line-through text-[10px] md:text-xs">
+                          KES {product.price.toLocaleString()}
+                        </span>
+                        <span className="text-primary font-bold text-xs md:text-sm italic">
+                          KES {product.discountPrice?.toLocaleString()}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-foreground font-medium text-xs md:text-sm">
                         KES {product.price.toLocaleString()}
                       </span>
-                      <span className="text-sm font-bold text-primary italic">
-                        KES {product.discountPrice?.toLocaleString()}
-                      </span>
-                    </>
-                  ) : (
-                    <p className="text-sm font-medium">
-                      KES {product.price.toLocaleString()}
-                    </p>
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </main>
 
       <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
         <DialogContent className="max-w-4xl w-[95vw] h-[90vh] md:h-[80vh] p-0 border-none bg-black overflow-hidden flex flex-col md:flex-row rounded-none">
           <DialogTitle className="sr-only">Product Details</DialogTitle>
           
-          {/* Image Slider */}
           <div className={`relative flex-[1.5] bg-neutral-900 flex items-center justify-center overflow-hidden h-[50vh] md:h-full group ${isMobileViewingImages ? 'block' : 'hidden md:flex'}`}>
             <AnimatePresence mode="wait">
               <motion.img
@@ -153,7 +146,6 @@ export function ProductGrid() {
                 >
                   <ChevronRight className="h-8 w-8" />
                 </Button>
-                {/* Back to details button for mobile image view */}
                 <Button
                   variant="secondary"
                   size="sm"
@@ -176,7 +168,6 @@ export function ProductGrid() {
             )}
           </div>
 
-          {/* Product Info */}
           <div className={`w-full md:w-80 bg-background p-8 flex flex-col h-full overflow-y-auto ${isMobileViewingImages ? 'hidden md:flex' : 'flex'}`}>
             <button 
               onClick={() => setSelectedProduct(null)}
@@ -209,14 +200,7 @@ export function ProductGrid() {
               <div className="space-y-4 text-sm text-muted-foreground font-light leading-relaxed">
                 <p>
                   Elevated luxury streetwear crafted with precision in Nairobi. 
-                  Designed for the modern mover who values authenticity and timeless silhouettes.
                 </p>
-                <ul className="space-y-2 pt-4">
-                  <li>• Premium African-sourced materials</li>
-                  <li>• Hand-finished detailing</li>
-                  <li>• Relaxed fit for modern comfort</li>
-                </ul>
-
                 <div className="pt-6">
                   <p className="text-xs uppercase tracking-widest mb-3">Select Size</p>
                   <div className="flex flex-wrap gap-2">
@@ -256,13 +240,13 @@ export function ProductGrid() {
               >
                 {selectedProduct?.status === "Sold Out" ? "Sold Out" : "Add to Cart"}
               </Button>
-              <Button variant="outline" className="w-full rounded-none h-14 uppercase tracking-widest text-xs font-bold">
-                Size Guide
-              </Button>
             </div>
           </div>
         </DialogContent>
       </Dialog>
-    </section>
+
+      <Footer />
+      <CartDrawer />
+    </div>
   );
 }

@@ -8,6 +8,8 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import OffersPage from "@/pages/offers";
 
+import ShopPage from "@/pages/shop";
+
 function Router() {
   const [location, setLocation] = useLocation();
 
@@ -31,6 +33,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/offers" component={OffersPage} />
+      <Route path="/shop" component={ShopPage} />
       <Route component={NotFound} />
     </Switch>
   );

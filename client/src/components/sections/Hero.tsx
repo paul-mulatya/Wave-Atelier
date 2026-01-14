@@ -26,8 +26,8 @@ export function Hero({ image }: HeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <span className="block text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-4">
-            New Collection
+          <span className="block text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-4 text-primary">
+            Our Collection
           </span>
           <h1 className="font-serif text-5xl md:text-7xl lg:text-9xl font-bold tracking-tight mb-6">
             Modern African <br /> Luxury
