@@ -1,5 +1,5 @@
 import { BRAND } from "@/lib/data";
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Facebook, Instagram, Twitter, Phone } from "lucide-react";
 
 export function Footer() {
   return (
@@ -63,10 +63,22 @@ export function Footer() {
           <div className="space-y-6">
             <h4 className="font-serif text-xl">Follow Us</h4>
             <div className="flex gap-4">
-              <a href="#" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" title="Instagram">
+              <a 
+                href={BRAND.instagram} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" 
+                title="Instagram"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" title="TikTok">
+              <a 
+                href={BRAND.tiktok} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" 
+                title="TikTok"
+              >
                 <svg 
                   viewBox="0 0 24 24" 
                   fill="none" 
@@ -78,6 +90,13 @@ export function Footer() {
                 >
                   <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
                 </svg>
+              </a>
+              <a 
+                href={`tel:${BRAND.phone}`} 
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" 
+                title="Call Us"
+              >
+                <Phone className="w-5 h-5" />
               </a>
               <a href="#" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" title="Twitter">
                 <Twitter className="w-5 h-5" />

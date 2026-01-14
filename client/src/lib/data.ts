@@ -61,8 +61,8 @@ export const BRAND = {
   email: "gracemwaniki09@gmail.com",
   phone: "+254 759 556 794",
   address: "Nairobi Kenya",
-  instagram: "@The_wave.kenya",
-  tiktok: "@The_wave.kenya",
+  instagram: "https://www.instagram.com/the_wave.kenya?igsh=MWVoejZ2OWNuMmM5aQ==",
+  tiktok: "https://www.tiktok.com/@the_wave.kenya?_r=1&_t=ZM-934fxNIEJB5",
   description: "Modern street luxury. Rooted in authenticity and crafted with precision.",
 };
 

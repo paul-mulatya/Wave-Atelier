@@ -1,15 +1,44 @@
-import { motion } from "framer-motion";
-import { PRODUCTS } from "@/lib/data";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { PRODUCTS, BRAND } from "@/lib/data";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CartDrawer } from "@/components/layout/CartDrawer";
-import { useCart } from "@/lib/cart";
+import { useCart, CartItem } from "@/lib/cart";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag } from "lucide-react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 export default function OffersPage() {
   const offerItems = PRODUCTS.filter(p => p.onOffer);
   const { addItem, setIsOpen } = useCart();
+  const [selectedProduct, setSelectedProduct] = useState<null | typeof PRODUCTS[0]>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [selectedSize, setSelectedSize] = useState<string>("M");
+
+  const openProduct = (product: typeof PRODUCTS[0]) => {
+    setSelectedProduct(product);
+    setCurrentImageIndex(0);
+    setSelectedSize("M");
+  };
+
+  const handleAddToCart = () => {
+    if (selectedProduct) {
+      addItem(selectedProduct, selectedSize);
+      setSelectedProduct(null);
+      setIsOpen(true);
+    }
+  };
+
+  const nextImage = () => {
+    if (!selectedProduct) return;
+    setCurrentImageIndex((prev) => (prev + 1) % selectedProduct.images.length);
+  };
+
+  const prevImage = () => {
+    if (!selectedProduct) return;
+    setCurrentImageIndex((prev) => (prev - 1 + selectedProduct.images.length) % selectedProduct.images.length);
+  };
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden">
@@ -35,6 +64,7 @@ export default function OffersPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 className="group cursor-pointer"
+                onClick={() => openProduct(product)}
               >
                 <div className="relative aspect-[3/4] overflow-hidden bg-secondary mb-6">
                   <img
@@ -47,11 +77,12 @@ export default function OffersPage() {
                   </div>
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <Button 
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         addItem(product, "M");
                         setIsOpen(true);
                       }}
-                      className="rounded-none bg-white text-black hover:bg-white/90 font-bold uppercase tracking-widest text-xs h-12 px-8"
+                      className="rounded-none bg-white text-black hover:bg-white/90 font-bold uppercase tracking-widest text-xs h-12 px-8 z-10"
                     >
                       Quick Add
                     </Button>
@@ -59,7 +90,7 @@ export default function OffersPage() {
                 </div>
                 
                 <div className="text-center">
-                  <h3 className="font-serif text-2xl mb-2">{product.name}</h3>
+                  <h3 className="font-serif text-2xl mb-2 group-hover:text-primary transition-colors">{product.name}</h3>
                   <div className="flex items-center justify-center gap-3">
                     <span className="text-muted-foreground line-through text-sm">
                       KES {product.price.toLocaleString()}
@@ -74,6 +105,114 @@ export default function OffersPage() {
           </div>
         </div>
       </main>
+
+      <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
+        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 border-none bg-black overflow-hidden flex flex-col md:flex-row rounded-none">
+          <DialogTitle className="sr-only">Product Details</DialogTitle>
+          
+          <div className="relative flex-1 bg-neutral-900 flex items-center justify-center overflow-hidden h-full group">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentImageIndex}
+                src={selectedProduct?.images[currentImageIndex]}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="w-full h-full object-contain"
+              />
+            </AnimatePresence>
+
+            {selectedProduct && selectedProduct.images.length > 1 && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                  onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                >
+                  <ChevronLeft className="h-8 w-8" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                  onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                >
+                  <ChevronRight className="h-8 w-8" />
+                </Button>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {selectedProduct.images.map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                        idx === currentImageIndex ? "bg-white" : "bg-white/30"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="w-full md:w-80 bg-background p-8 flex flex-col h-full overflow-y-auto">
+            <button 
+              onClick={() => setSelectedProduct(null)}
+              className="absolute top-4 right-4 text-foreground/50 hover:text-foreground md:hidden"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            
+            <div className="mb-8">
+              <p className="text-xs text-muted-foreground uppercase tracking-widest mb-2">
+                {selectedProduct?.collection}
+              </p>
+              <h2 className="font-serif text-3xl mb-4">{selectedProduct?.name}</h2>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-muted-foreground line-through text-sm">
+                  KES {selectedProduct?.price.toLocaleString()}
+                </span>
+                <span className="text-xl font-bold text-primary italic">
+                  KES {selectedProduct?.discountPrice?.toLocaleString()}
+                </span>
+              </div>
+              <div className="space-y-4 text-sm text-muted-foreground font-light leading-relaxed">
+                <p>
+                  Elevated luxury streetwear crafted with precision in Nairobi. 
+                  Designed for the modern mover who values authenticity and timeless silhouettes.
+                </p>
+                <div className="pt-6">
+                  <p className="text-xs uppercase tracking-widest mb-3">Select Size</p>
+                  <div className="flex gap-2">
+                    {["S", "M", "L", "XL"].map((size) => (
+                      <button
+                        key={size}
+                        onClick={() => setSelectedSize(size)}
+                        className={`w-10 h-10 border text-xs font-bold transition-colors ${
+                          selectedSize === size
+                            ? "bg-primary text-white border-primary"
+                            : "border-border/60 hover:border-primary"
+                        }`}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-auto pt-8 space-y-4">
+              <Button 
+                className="w-full rounded-none h-14 bg-primary text-white hover:bg-primary/90 uppercase tracking-widest text-xs font-bold"
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
       <CartDrawer />
