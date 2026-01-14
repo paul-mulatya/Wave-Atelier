@@ -14,12 +14,14 @@ export default function OffersPage() {
   const { addItem, setIsOpen } = useCart();
   const [selectedProduct, setSelectedProduct] = useState<null | typeof PRODUCTS[0]>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMobileViewingImages, setIsMobileViewingImages] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string>("M");
 
   const openProduct = (product: typeof PRODUCTS[0]) => {
     setSelectedProduct(product);
     setCurrentImageIndex(0);
-    setSelectedSize("M");
+    setIsMobileViewingImages(false);
+    setSelectedSize(product.availableSizes ? product.availableSizes[0] : "M");
   };
 
   const handleAddToCart = () => {
@@ -115,7 +117,7 @@ export default function OffersPage() {
         <DialogContent className="max-w-4xl w-[95vw] h-[90vh] md:h-[80vh] p-0 border-none bg-black overflow-hidden flex flex-col md:flex-row rounded-none">
           <DialogTitle className="sr-only">Product Details</DialogTitle>
           
-          <div className="relative flex-[1.5] bg-neutral-900 flex items-center justify-center overflow-hidden h-[50vh] md:h-full group">
+          <div className={`relative flex-[1.5] bg-neutral-900 flex items-center justify-center overflow-hidden h-[50vh] md:h-full group ${isMobileViewingImages ? 'block' : 'hidden md:flex'}`}>
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentImageIndex}
@@ -146,6 +148,15 @@ export default function OffersPage() {
                 >
                   <ChevronRight className="h-8 w-8" />
                 </Button>
+                {/* Back to details button for mobile image view */}
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="absolute top-4 left-4 md:hidden rounded-none uppercase tracking-widest text-[10px] font-bold"
+                  onClick={() => setIsMobileViewingImages(false)}
+                >
+                  Back to Details
+                </Button>
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                   {selectedProduct.images.map((_, idx) => (
                     <div
@@ -160,7 +171,7 @@ export default function OffersPage() {
             )}
           </div>
 
-          <div className="w-full md:w-80 bg-background p-8 flex flex-col h-full overflow-y-auto">
+          <div className={`w-full md:w-80 bg-background p-8 flex flex-col h-full overflow-y-auto ${isMobileViewingImages ? 'hidden md:flex' : 'flex'}`}>
             <button 
               onClick={() => setSelectedProduct(null)}
               className="absolute top-4 right-4 text-foreground/50 hover:text-foreground md:hidden"
@@ -188,8 +199,8 @@ export default function OffersPage() {
                 </p>
                 <div className="pt-6">
                   <p className="text-xs uppercase tracking-widest mb-3">Select Size</p>
-                  <div className="flex gap-2">
-                    {["S", "M", "L", "XL"].map((size) => (
+                  <div className="flex flex-wrap gap-2">
+                    {(selectedProduct?.availableSizes || ["S", "M", "L", "XL"]).map((size) => (
                       <button
                         key={size}
                         onClick={() => setSelectedSize(size)}
@@ -213,8 +224,7 @@ export default function OffersPage() {
                 className="w-full rounded-none h-14 uppercase tracking-widest text-xs font-bold md:hidden"
                 onClick={(e) => {
                   e.stopPropagation();
-                  // Ensure we're showing images
-                  setCurrentImageIndex(0);
+                  setIsMobileViewingImages(true);
                 }}
               >
                 View Images

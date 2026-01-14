@@ -81,7 +81,22 @@ export const COLLECTIONS = [
   }
 ];
 
-export const PRODUCTS = [
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  discountPrice?: number;
+  category: string;
+  collection: string;
+  image: string;
+  images: string[];
+  isNew: boolean;
+  onOffer?: boolean;
+  status?: string;
+  availableSizes?: string[];
+}
+
+export const PRODUCTS: Product[] = [
   {
     id: 7,
     name: "Earth-Tone Maxi Dress",
@@ -105,6 +120,7 @@ export const PRODUCTS = [
     images: [prodBrownMini1, prodBrownMini2],
     isNew: true,
     onOffer: true,
+    availableSizes: ["S", "M", "L", "XL"],
   },
   {
     id: 9,
@@ -130,6 +146,7 @@ export const PRODUCTS = [
     images: [prodDress1, prodDress2],
     isNew: false,
     onOffer: true,
+    availableSizes: ["XS", "XL"],
   },
   {
     id: 11,
@@ -142,6 +159,7 @@ export const PRODUCTS = [
     images: [prodMbisuBlue1, prodMbisuBlue2, prodMbisuBlue3],
     isNew: true,
     onOffer: true,
+    availableSizes: ["S", "M", "L", "XL"],
   },
   {
     id: 5,
@@ -155,6 +173,7 @@ export const PRODUCTS = [
     isNew: false,
     onOffer: true,
     status: "Only Pants Remain",
+    availableSizes: ["S"],
   },
   {
     id: 10,
@@ -199,7 +218,7 @@ export const PRODUCTS = [
     image: prodSetCream2,
     images: [prodSetCream1, prodSetCream2, prodSetCream3, prodSetCream4, prodSetCream5],
     isNew: true,
-    status: "Sold Out",
+    status: "Only Boys Pants Remain",
   },
   {
     id: 6,
