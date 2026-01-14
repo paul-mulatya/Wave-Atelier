@@ -31,9 +31,18 @@ import prodSetBlue2 from '@assets/IMG-20260113-WA0399_1768332934224.jpg';
 import prodSetBlue3 from '@assets/IMG-20260113-WA0391_1768332934225.jpg';
 import prodSetBlue6 from '@assets/IMG-20260113-WA0381_1768332934228.jpg';
 
-// New Offer Images
+// Offer Images
 import prodSetBlue4 from '@assets/IMG-20260113-WA0389_1768420723498.jpg';
 import prodSetBlue5 from '@assets/IMG-20260113-WA0383_1768420741816.jpg';
+
+// New Offer Designs
+import prodBrownMaxi1 from '@assets/1000284326_1768421766867.jpg';
+import prodBrownMaxi2 from '@assets/1000284327_1768421766868.jpg';
+import prodBrownMaxi3 from '@assets/1000284328_1768421766869.jpg';
+import prodBrownMaxi4 from '@assets/1000284329_1768421766870.jpg';
+import prodBrownMini1 from '@assets/1000284340_1768421766870.jpg';
+import prodBrownMini2 from '@assets/1000284341_1768421766872.jpg';
+import prodLuxuryDenimSet from '@assets/IMG-20260113-WA0409(1)_1768421855154.jpg';
 
 // Signature Denim Set extra images
 import prodDenim3 from '@assets/IMG-20260113-WA0340_1768332934220.jpg';
@@ -87,6 +96,42 @@ export const PRODUCTS = [
     image: prodDenim2,
     images: [prodDenim1, prodDenim2, prodDenim3, prodDenim4],
     isNew: true,
+  },
+  {
+    id: 7,
+    name: "Earth-Tone Maxi Dress",
+    price: 4800,
+    discountPrice: 4080,
+    category: "Dresses",
+    collection: "Clean Aesthetic",
+    image: prodBrownMaxi1,
+    images: [prodBrownMaxi1, prodBrownMaxi2, prodBrownMaxi3, prodBrownMaxi4],
+    isNew: true,
+    onOffer: true,
+  },
+  {
+    id: 8,
+    name: "Chocolate Puff-Sleeve Mini",
+    price: 3500,
+    discountPrice: 2975,
+    category: "Dresses",
+    collection: "Clean Aesthetic",
+    image: prodBrownMini1,
+    images: [prodBrownMini1, prodBrownMini2],
+    isNew: true,
+    onOffer: true,
+  },
+  {
+    id: 9,
+    name: "Mocha Luxury Utility Set",
+    price: 7500,
+    discountPrice: 6375,
+    category: "Sets",
+    collection: "Vintage Revival",
+    image: prodLuxuryDenimSet,
+    images: [prodLuxuryDenimSet],
+    isNew: true,
+    onOffer: true,
   },
   {
     id: 3,
