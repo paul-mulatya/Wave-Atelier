@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
+import { Link } from "wouter";
 
 export function ProductGrid() {
     const [selectedProduct, setSelectedProduct] = useState<null | typeof PRODUCTS[0]>(null);
@@ -42,16 +43,27 @@ export function ProductGrid() {
   return (
     <section id="shop" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <h2 className="font-serif text-4xl text-center mb-16">Our Collection</h2>
+        <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
+          <div className="max-w-xl">
+            <h2 className="font-serif text-4xl mb-4 text-left">Our Collection</h2>
+            <p className="text-muted-foreground font-light text-sm">Explore our curated selection of modern African luxury streetwear, crafted for the bold and authentic.</p>
+          </div>
+          <Link href="/offers">
+            <Button variant="link" className="text-primary p-0 h-auto font-bold uppercase tracking-[0.2em] text-[10px] group">
+              View Entire Shop <ChevronRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+        </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-          {PRODUCTS.map((product) => (
+        {/* Horizontal scroll on mobile, grid on desktop */}
+        <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-8 md:pb-0 scrollbar-hide snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0">
+          {PRODUCTS.slice(0, 4).map((product) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="group cursor-pointer"
+              className="group cursor-pointer min-w-[280px] md:min-w-0 snap-start"
               onClick={() => openProduct(product)}
             >
               <div className="relative aspect-[3/4] mb-4 overflow-hidden bg-secondary">
@@ -76,17 +88,17 @@ export function ProductGrid() {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <div className="text-center">
-                <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">
+              <div className="text-left px-2">
+                <p className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">
                   {product.collection}
                 </p>
-                <h3 className="font-serif text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
+                <h3 className="font-serif text-base text-foreground mb-1 group-hover:text-primary transition-colors">
                   {product.name}
                 </h3>
-                <div className="flex items-center justify-center gap-3">
+                <div className="flex items-center gap-3">
                   {product.onOffer ? (
                     <>
-                      <span className="text-sm text-muted-foreground line-through">
+                      <span className="text-xs text-muted-foreground line-through">
                         KES {product.price.toLocaleString()}
                       </span>
                       <span className="text-sm font-bold text-primary italic">
