@@ -107,10 +107,10 @@ export default function OffersPage() {
       </main>
 
       <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
-        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 border-none bg-black overflow-hidden flex flex-col md:flex-row rounded-none">
+        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] md:h-[80vh] p-0 border-none bg-black overflow-hidden flex flex-col md:flex-row rounded-none">
           <DialogTitle className="sr-only">Product Details</DialogTitle>
           
-          <div className="relative flex-1 bg-neutral-900 flex items-center justify-center overflow-hidden h-full group">
+          <div className="relative flex-[1.5] bg-neutral-900 flex items-center justify-center overflow-hidden h-[50vh] md:h-full group">
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentImageIndex}
