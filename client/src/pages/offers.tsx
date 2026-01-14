@@ -135,7 +135,7 @@ export default function OffersPage() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/10 z-20"
                   onClick={(e) => { e.stopPropagation(); prevImage(); }}
                 >
                   <ChevronLeft className="h-8 w-8" />
@@ -143,7 +143,7 @@ export default function OffersPage() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/10 z-20"
                   onClick={(e) => { e.stopPropagation(); nextImage(); }}
                 >
                   <ChevronRight className="h-8 w-8" />
