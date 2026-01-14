@@ -85,8 +85,8 @@ export const PRODUCTS = [
   {
     id: 7,
     name: "Earth-Tone Maxi Dress",
-    price: 4800,
-    discountPrice: 4080,
+    price: 5800,
+    discountPrice: 4930,
     category: "Dresses",
     collection: "Clean Aesthetic",
     image: prodBrownMaxi1,

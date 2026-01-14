@@ -36,11 +36,60 @@ export function Offers() {
                 <span className="text-[10px] uppercase tracking-widest text-muted-foreground">Discount</span>
               </div>
               <div className="h-12 w-px bg-primary/20" />
-              <Link href="/offers">
-                <Button className="rounded-none h-14 px-10 bg-primary text-white hover:bg-primary/90 uppercase tracking-widest text-xs font-bold transition-all hover:gap-4">
-                  Shop Now
-                </Button>
-              </Link>
+              <div className="relative group/btn">
+                {/* Pointing Arrows */}
+                <div className="absolute -left-12 top-1/2 -translate-y-1/2 flex gap-1 pointer-events-none">
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      animate={{ 
+                        x: [0, 10, 0],
+                        opacity: [0.3, 1, 0.3]
+                      }}
+                      transition={{ 
+                        duration: 1.5, 
+                        repeat: Infinity, 
+                        delay: i * 0.2,
+                        ease: "easeInOut"
+                      }}
+                      className="text-primary"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m9 18 6-6-6-6"/>
+                      </svg>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <Link href="/offers">
+                  <Button className="relative z-10 rounded-none h-14 px-10 bg-primary text-white hover:bg-primary/90 uppercase tracking-widest text-xs font-bold transition-all hover:gap-4">
+                    Shop Now
+                  </Button>
+                </Link>
+
+                <div className="absolute -right-12 top-1/2 -translate-y-1/2 flex gap-1 pointer-events-none flex-row-reverse">
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      animate={{ 
+                        x: [0, -10, 0],
+                        opacity: [0.3, 1, 0.3]
+                      }}
+                      transition={{ 
+                        duration: 1.5, 
+                        repeat: Infinity, 
+                        delay: i * 0.2,
+                        ease: "easeInOut"
+                      }}
+                      className="text-primary"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m15 18-6-6 6-6"/>
+                      </svg>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
 
