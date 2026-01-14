@@ -44,6 +44,9 @@ import prodBrownMini1 from '@assets/1000284340_1768421766870.jpg';
 import prodBrownMini2 from '@assets/1000284341_1768421766872.jpg';
 import prodLuxuryDenimSet from '@assets/IMG-20260113-WA0409(1)_1768421855154.jpg';
 
+// New Blue Mbisu Tunic
+import prodMbisuBlue from '@assets/stock_images/blue_tunic_dress_afr_4bac89bc.jpg';
+
 // Signature Denim Set extra images
 import prodDenim3 from '@assets/IMG-20260113-WA0340_1768332934220.jpg';
 import prodDenim4 from '@assets/IMG-20260113-WA0336_1768332934222.jpg';
@@ -124,8 +127,8 @@ export const PRODUCTS = [
   {
     id: 9,
     name: "Mocha Luxury Utility Set",
-    price: 7500,
-    discountPrice: 6375,
+    price: 6000,
+    discountPrice: 5100,
     category: "Sets",
     collection: "Vintage Revival",
     image: prodLuxuryDenimSet,
@@ -135,7 +138,7 @@ export const PRODUCTS = [
   },
   {
     id: 3,
-    name: "Mbisu Tunic",
+    name: "Mbisu Tunic (Brown)",
     price: 3900,
     discountPrice: 3315,
     category: "Dresses",
@@ -143,6 +146,18 @@ export const PRODUCTS = [
     image: prodDress1,
     images: [prodDress1, prodDress2],
     isNew: false,
+    onOffer: true,
+  },
+  {
+    id: 11,
+    name: "Mbisu Tunic (Blue)",
+    price: 3900,
+    discountPrice: 3315,
+    category: "Dresses",
+    collection: "Clean Aesthetic",
+    image: prodMbisuBlue,
+    images: [prodMbisuBlue],
+    isNew: true,
     onOffer: true,
   },
   {
