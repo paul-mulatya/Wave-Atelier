@@ -72,9 +72,14 @@ export default function OffersPage() {
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute top-4 right-4 bg-primary text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
-                    15% OFF
+                {product.status && (
+                  <div className="absolute top-4 left-4 bg-black/80 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
+                    {product.status}
                   </div>
+                )}
+                <div className="absolute top-4 right-4 bg-primary text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
+                  15% OFF
+                </div>
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <Button 
                       onClick={(e) => {
@@ -204,10 +209,22 @@ export default function OffersPage() {
 
             <div className="mt-auto pt-8 space-y-4">
               <Button 
+                variant="outline"
+                className="w-full rounded-none h-14 uppercase tracking-widest text-xs font-bold md:hidden"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // Ensure we're showing images
+                  setCurrentImageIndex(0);
+                }}
+              >
+                View Images
+              </Button>
+              <Button 
                 className="w-full rounded-none h-14 bg-primary text-white hover:bg-primary/90 uppercase tracking-widest text-xs font-bold"
                 onClick={handleAddToCart}
+                disabled={!!selectedProduct?.status && selectedProduct.status === "Sold Out"}
               >
-                Add to Cart
+                {selectedProduct?.status === "Sold Out" ? "Sold Out" : "Add to Cart"}
               </Button>
             </div>
           </div>

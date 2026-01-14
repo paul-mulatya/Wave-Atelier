@@ -40,7 +40,7 @@ export function ProductGrid() {
   return (
     <section id="shop" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <h2 className="font-serif text-4xl text-center mb-16">Selected Pieces</h2>
+        <h2 className="font-serif text-4xl text-center mb-16">Our Collection</h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {PRODUCTS.map((product) => (
@@ -53,14 +53,19 @@ export function ProductGrid() {
               onClick={() => openProduct(product)}
             >
               <div className="relative aspect-[3/4] mb-4 overflow-hidden bg-secondary">
-                {product.isNew && !product.onOffer && (
+                {product.isNew && !product.onOffer && !product.status && (
                   <Badge className="absolute top-4 left-4 z-10 bg-primary text-white hover:bg-primary rounded-none tracking-widest text-[10px] py-1 px-3 uppercase">
                     New Arrival
                   </Badge>
                 )}
-                {product.onOffer && (
+                {product.onOffer && !product.status && (
                   <Badge className="absolute top-4 left-4 z-10 bg-primary text-white hover:bg-primary rounded-none tracking-widest text-[10px] py-1 px-3 uppercase">
                     15% OFF
+                  </Badge>
+                )}
+                {product.status && (
+                  <Badge className="absolute top-4 left-4 z-10 bg-black/80 text-white hover:bg-black/80 rounded-none tracking-widest text-[10px] py-1 px-3 uppercase">
+                    {product.status}
                   </Badge>
                 )}
                 <img
@@ -212,10 +217,22 @@ export function ProductGrid() {
 
             <div className="mt-auto pt-8 space-y-4">
               <Button 
+                variant="outline"
+                className="w-full rounded-none h-14 uppercase tracking-widest text-xs font-bold md:hidden"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // Trigger image viewing mode
+                  setCurrentImageIndex(0);
+                }}
+              >
+                View Images
+              </Button>
+              <Button 
                 className="w-full rounded-none h-14 bg-primary text-white hover:bg-primary/90 uppercase tracking-widest text-xs font-bold"
                 onClick={handleAddToCart}
+                disabled={!!selectedProduct?.status && selectedProduct.status === "Sold Out"}
               >
-                Add to Cart
+                {selectedProduct?.status === "Sold Out" ? "Sold Out" : "Add to Cart"}
               </Button>
               <Button variant="outline" className="w-full rounded-none h-14 uppercase tracking-widest text-xs font-bold">
                 Size Guide

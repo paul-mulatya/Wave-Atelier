@@ -18,13 +18,14 @@ function Router() {
         return;
       }
       
-      // Otherwise, prevent default and use internal navigation
-      // wouter handles this mostly, but we ensure it doesn't exit
+      // If we're on a subpage, we want back to always go to "/"
+      setLocation("/");
+      event.preventDefault();
     };
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, [location]);
+  }, [location, setLocation]);
 
   return (
     <Switch>

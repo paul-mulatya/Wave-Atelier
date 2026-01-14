@@ -117,6 +117,7 @@ export const PRODUCTS = [
     images: [prodLuxuryDenimSet],
     isNew: true,
     onOffer: true,
+    status: "Sold Out",
   },
   {
     id: 3,
@@ -153,6 +154,7 @@ export const PRODUCTS = [
     images: [prodSetBlue5, prodSetBlue4, prodSetBlue1, prodSetBlue2, prodSetBlue3, prodSetBlue6],
     isNew: false,
     onOffer: true,
+    status: "Only Pants Remain",
   },
   {
     id: 10,
@@ -175,6 +177,7 @@ export const PRODUCTS = [
     image: heroImg2,
     images: [heroImg1, heroImg2, heroImg3],
     isNew: true,
+    status: "Sold Out",
   },
   {
     id: 2,
@@ -185,6 +188,7 @@ export const PRODUCTS = [
     image: prodDenim2,
     images: [prodDenim1, prodDenim2, prodDenim3, prodDenim4],
     isNew: true,
+    status: "Only Boys Pants Remain",
   },
   {
     id: 4,
@@ -195,6 +199,7 @@ export const PRODUCTS = [
     image: prodSetCream2,
     images: [prodSetCream1, prodSetCream2, prodSetCream3, prodSetCream4, prodSetCream5],
     isNew: true,
+    status: "Sold Out",
   },
   {
     id: 6,
@@ -205,5 +210,6 @@ export const PRODUCTS = [
     image: prodHoodie1,
     images: [prodHoodie1, prodHoodie2, prodHoodie3, prodHoodie4, prodHoodie5, prodHoodie6, prodHoodie7],
     isNew: false,
+    status: "Sold Out",
   },
 ];
