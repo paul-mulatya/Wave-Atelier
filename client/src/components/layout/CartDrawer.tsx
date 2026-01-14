@@ -100,7 +100,9 @@ export function CartDrawer() {
                     </div>
                   </div>
                   <div className="text-right py-1">
-                    <p className="text-sm font-medium">KES {(item.product.price * item.quantity).toLocaleString()}</p>
+                    <p className="text-sm font-medium">
+                      KES {((item.product.discountPrice || item.product.price) * item.quantity).toLocaleString()}
+                    </p>
                   </div>
                 </div>
               ))}

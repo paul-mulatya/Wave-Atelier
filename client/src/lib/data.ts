@@ -29,9 +29,11 @@ import prodHoodie7 from '@assets/IMG-20260113-WA0405_1768332934223.jpg';
 // Tie-Dye Lounge Set (Blue) extra images
 import prodSetBlue2 from '@assets/IMG-20260113-WA0399_1768332934224.jpg';
 import prodSetBlue3 from '@assets/IMG-20260113-WA0391_1768332934225.jpg';
-import prodSetBlue4 from '@assets/IMG-20260113-WA0389_1768332934226.jpg';
-import prodSetBlue5 from '@assets/IMG-20260113-WA0383_1768332934227.jpg';
 import prodSetBlue6 from '@assets/IMG-20260113-WA0381_1768332934228.jpg';
+
+// New Offer Images
+import prodSetBlue4 from '@assets/IMG-20260113-WA0389_1768420723498.jpg';
+import prodSetBlue5 from '@assets/IMG-20260113-WA0383_1768420741816.jpg';
 
 // Signature Denim Set extra images
 import prodDenim3 from '@assets/IMG-20260113-WA0340_1768332934220.jpg';
@@ -110,11 +112,13 @@ export const PRODUCTS = [
     id: 5,
     name: "Tie-Dye Lounge Set (Blue)",
     price: 5500,
+    discountPrice: 4675,
     category: "Streetwear",
     collection: "Clean Aesthetic",
-    image: prodSetBlue1,
-    images: [prodSetBlue1, prodSetBlue2, prodSetBlue3, prodSetBlue4, prodSetBlue5, prodSetBlue6],
+    image: prodSetBlue4,
+    images: [prodSetBlue4, prodSetBlue5, prodSetBlue1, prodSetBlue2, prodSetBlue3, prodSetBlue6],
     isNew: false,
+    onOffer: true,
   },
   {
     id: 6,

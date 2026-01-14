@@ -53,9 +53,14 @@ export function ProductGrid() {
               onClick={() => openProduct(product)}
             >
               <div className="relative aspect-[3/4] mb-4 overflow-hidden bg-secondary">
-                {product.isNew && (
+                {product.isNew && !product.onOffer && (
                   <Badge className="absolute top-4 left-4 z-10 bg-primary text-white hover:bg-primary rounded-none tracking-widest text-[10px] py-1 px-3 uppercase">
                     New Arrival
+                  </Badge>
+                )}
+                {product.onOffer && (
+                  <Badge className="absolute top-4 left-4 z-10 bg-primary text-white hover:bg-primary rounded-none tracking-widest text-[10px] py-1 px-3 uppercase">
+                    15% OFF
                   </Badge>
                 )}
                 <img
@@ -71,9 +76,22 @@ export function ProductGrid() {
                 <h3 className="font-serif text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
                   {product.name}
                 </h3>
-                <p className="text-sm font-medium">
-                  KES {product.price.toLocaleString()}
-                </p>
+                <div className="flex items-center justify-center gap-3">
+                  {product.onOffer ? (
+                    <>
+                      <span className="text-sm text-muted-foreground line-through">
+                        KES {product.price.toLocaleString()}
+                      </span>
+                      <span className="text-sm font-bold text-primary italic">
+                        KES {product.discountPrice?.toLocaleString()}
+                      </span>
+                    </>
+                  ) : (
+                    <p className="text-sm font-medium">
+                      KES {product.price.toLocaleString()}
+                    </p>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -144,9 +162,22 @@ export function ProductGrid() {
                 {selectedProduct?.collection}
               </p>
               <h2 className="font-serif text-3xl mb-4">{selectedProduct?.name}</h2>
-              <p className="text-xl font-medium mb-6">
-                KES {selectedProduct?.price.toLocaleString()}
-              </p>
+              <div className="flex items-center gap-3 mb-6">
+                {selectedProduct?.onOffer ? (
+                  <>
+                    <span className="text-muted-foreground line-through text-sm">
+                      KES {selectedProduct?.price.toLocaleString()}
+                    </span>
+                    <span className="text-xl font-bold text-primary italic">
+                      KES {selectedProduct?.discountPrice?.toLocaleString()}
+                    </span>
+                  </>
+                ) : (
+                  <p className="text-xl font-medium">
+                    KES {selectedProduct?.price.toLocaleString()}
+                  </p>
+                )}
+              </div>
               <div className="space-y-4 text-sm text-muted-foreground font-light leading-relaxed">
                 <p>
                   Elevated luxury streetwear crafted with precision in Nairobi. 
