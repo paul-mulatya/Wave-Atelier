@@ -9,6 +9,7 @@ import Home from "@/pages/home";
 import OffersPage from "@/pages/offers";
 
 import ShopPage from "@/pages/shop";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 
 function Router() {
   const [location, setLocation] = useLocation();
@@ -30,12 +31,15 @@ function Router() {
   }, [location, setLocation]);
 
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/offers" component={OffersPage} />
-      <Route path="/shop" component={ShopPage} />
-      <Route component={NotFound} />
-    </Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/offers" component={OffersPage} />
+        <Route path="/shop" component={ShopPage} />
+        <Route component={NotFound} />
+      </Switch>
+    </>
   );
 }
 

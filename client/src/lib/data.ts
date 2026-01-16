@@ -189,7 +189,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 1,
     name: "Terracotta Kaftan Maxi",
-    price: 4500,
+    price: 5800,
     category: "Dresses",
     collection: "Clean Aesthetic",
     image: heroImg2,
