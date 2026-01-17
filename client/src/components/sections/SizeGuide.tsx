@@ -31,7 +31,7 @@ export function SizeGuide() {
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl w-[95vw] max-h-[90vh] overflow-y-auto p-0 border-none rounded-none bg-background">
-        <DialogHeader className="p-6 border-b sticky top-0 bg-background z-10">
+        <DialogHeader className="p-6 border-b sticky top-0 bg-background z-10 flex flex-row items-center justify-between space-y-0">
           <DialogTitle className="font-serif text-2xl">Size Guides</DialogTitle>
         </DialogHeader>
         
