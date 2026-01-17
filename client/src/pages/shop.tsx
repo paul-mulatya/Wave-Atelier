@@ -7,10 +7,9 @@ import { useCart } from "@/lib/cart";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { ChevronLeft, ChevronRight, X, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SizeGuide } from "@/components/sections/SizeGuide";
-import { Input } from "@/components/ui/input";
 
 export default function ShopPage() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -59,15 +58,6 @@ export default function ShopPage() {
               Modern African Luxury
             </p>
           </header>
-
-          <div className="max-w-md mx-auto mb-12">
-            <input
-              type="text"
-              placeholder="Search here"
-              className="w-full h-12 border border-black px-4 text-sm rounded-none focus:outline-none"
-              readOnly
-            />
-          </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
             {PRODUCTS.map((product, idx) => (
