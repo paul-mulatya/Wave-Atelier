@@ -9,8 +9,11 @@ import { Button } from "@/components/ui/button";
 import { Ruler, Instagram, Mail, MessageSquare } from "lucide-react";
 import { BRAND } from "@/lib/data";
 import measurementIllustration from "@assets/1768681554512_1768681605762.jpg";
+import { motion, PanInfo } from "framer-motion";
+import { useState } from "react";
 
 export function SizeGuide() {
+  const [open, setOpen] = useState(false);
   const sizeData = [
     { size: "XXS", bust: "30 - 31", waist: "22 - 23", hips: "33 - 34" },
     { size: "XS", bust: "32 - 34", waist: "24 - 25", hips: "35 - 36" },
@@ -23,19 +26,37 @@ export function SizeGuide() {
     { size: "4XL", bust: "52 - 55", waist: "47 - 50", hips: "58 - 61" },
   ];
 
+  const handleDragEnd = (event: any, info: PanInfo) => {
+    if (info.offset.y > 100) {
+      setOpen(false);
+    }
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="link" className="text-primary p-0 h-auto font-bold uppercase tracking-widest text-[10px] flex items-center gap-2">
           <Ruler className="w-3 h-3" /> Size Guide
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-2xl w-[95vw] max-h-[90vh] overflow-y-auto p-0 border-none rounded-none bg-background">
-        <DialogHeader className="p-6 border-b sticky top-0 bg-background z-10 flex flex-row items-center justify-between space-y-0">
-          <DialogTitle className="font-serif text-2xl">Size Guides</DialogTitle>
-        </DialogHeader>
-        
-        <div className="p-6 space-y-12">
+      <DialogContent className="max-w-2xl w-[95vw] max-h-[90vh] overflow-y-auto p-0 border-none rounded-none bg-background md:rounded-lg">
+        <motion.div
+          drag="y"
+          dragConstraints={ { top: 0, bottom: 0 } }
+          dragElastic={ { top: 0, bottom: 0.5 } }
+          onDragEnd={handleDragEnd}
+          className="h-full flex flex-col"
+        >
+          {/* Mobile Handle */}
+          <div className="md:hidden w-full flex justify-center pt-3 pb-1">
+            <div className="w-12 h-1.5 bg-muted rounded-full opacity-40" />
+          </div>
+          
+          <DialogHeader className="p-6 border-b sticky top-0 bg-background z-10 flex flex-row items-center justify-between space-y-0">
+            <DialogTitle className="font-serif text-2xl">Size Guides</DialogTitle>
+          </DialogHeader>
+          
+          <div className="p-6 space-y-12">
           <section>
             <h3 className="font-serif text-xl mb-6 text-center">Women's Bottom Size Chart</h3>
             <div className="overflow-x-auto">
@@ -132,6 +153,7 @@ export function SizeGuide() {
             </ul>
           </section>
         </div>
+        </motion.div>
       </DialogContent>
     </Dialog>
   );

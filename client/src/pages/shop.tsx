@@ -7,16 +7,27 @@ import { useCart } from "@/lib/cart";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SizeGuide } from "@/components/sections/SizeGuide";
+import { Input } from "@/components/ui/input";
 
 export default function ShopPage() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMobileViewingImages, setIsMobileViewingImages] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string>("M");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeSizeFilter, setActiveSizeFilter] = useState<string | null>(null);
   const { addItem, setIsOpen } = useCart();
+
+  const filteredProducts = PRODUCTS.filter((product) => {
+    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSize = !activeSizeFilter || product.availableSizes?.includes(activeSizeFilter) || (!product.availableSizes && ["S", "M", "L", "XL"].includes(activeSizeFilter));
+    return matchesSearch && matchesSize;
+  });
+
+  const sizes = ["S", "M", "L", "XL"];
 
   const openProduct = (product: Product) => {
     setSelectedProduct(product);
@@ -59,8 +70,37 @@ export default function ShopPage() {
             </p>
           </header>
 
+          <div className="max-w-2xl mx-auto mb-16 space-y-6">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search products..."
+                className="pl-10 h-12 bg-transparent border-border rounded-none focus-visible:ring-primary focus-visible:ring-offset-0"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            
+            <div className="flex justify-center gap-3">
+              {sizes.map((size) => (
+                <button
+                  key={size}
+                  onClick={() => setActiveSizeFilter(activeSizeFilter === size ? null : size)}
+                  className={`w-12 h-12 border text-[10px] font-bold tracking-widest transition-all duration-300 ${
+                    activeSizeFilter === size
+                      ? "bg-black text-white border-black"
+                      : "bg-transparent text-muted-foreground border-border hover:border-black hover:text-black"
+                  }`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
-            {PRODUCTS.map((product, idx) => (
+            {filteredProducts.map((product, idx) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
