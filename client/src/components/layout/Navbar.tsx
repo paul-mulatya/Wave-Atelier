@@ -33,9 +33,9 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
-          <a className="font-serif text-2xl md:text-3xl font-bold tracking-tighter text-foreground">
+          <span className="font-serif text-2xl md:text-3xl font-bold tracking-tighter text-foreground cursor-pointer">
             {BRAND.name}
-          </a>
+          </span>
         </Link>
 
         {/* Desktop Links */}
