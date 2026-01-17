@@ -17,17 +17,7 @@ export default function ShopPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMobileViewingImages, setIsMobileViewingImages] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string>("M");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeSizeFilter, setActiveSizeFilter] = useState<string | null>(null);
   const { addItem, setIsOpen } = useCart();
-
-  const filteredProducts = PRODUCTS.filter((product) => {
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesSize = !activeSizeFilter || product.availableSizes?.includes(activeSizeFilter) || (!product.availableSizes && ["S", "M", "L", "XL"].includes(activeSizeFilter));
-    return matchesSearch && matchesSize;
-  });
-
-  const sizes = ["S", "M", "L", "XL"];
 
   const openProduct = (product: Product) => {
     setSelectedProduct(product);
@@ -70,37 +60,17 @@ export default function ShopPage() {
             </p>
           </header>
 
-          <div className="max-w-2xl mx-auto mb-16 space-y-6 relative z-10">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="w-full pl-10 h-12 bg-transparent border border-border rounded-none focus:outline-none focus:border-primary px-4 text-sm"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-            
-            <div className="flex justify-center gap-3">
-              {sizes.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setActiveSizeFilter(activeSizeFilter === size ? null : size)}
-                  className={`w-12 h-12 border text-[10px] font-bold tracking-widest transition-all duration-300 ${
-                    activeSizeFilter === size
-                      ? "bg-black text-white border-black"
-                      : "bg-transparent text-muted-foreground border-border hover:border-black hover:text-black"
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
+          <div className="max-w-md mx-auto mb-12">
+            <input
+              type="text"
+              placeholder="Search here"
+              className="w-full h-12 border border-black px-4 text-sm rounded-none focus:outline-none"
+              readOnly
+            />
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
-            {filteredProducts.map((product, idx) => (
+            {PRODUCTS.map((product, idx) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
