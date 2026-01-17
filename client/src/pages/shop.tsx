@@ -73,10 +73,10 @@ export default function ShopPage() {
           <div className="max-w-2xl mx-auto mb-16 space-y-6">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
+              <input
                 type="text"
                 placeholder="Search products..."
-                className="pl-10 h-12 bg-transparent border-border rounded-none focus-visible:ring-primary focus-visible:ring-offset-0"
+                className="w-full pl-10 h-12 bg-transparent border border-border rounded-none focus:outline-none focus:border-primary px-4 text-sm"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
