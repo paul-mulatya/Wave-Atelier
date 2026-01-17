@@ -70,7 +70,7 @@ export default function ShopPage() {
             </p>
           </header>
 
-          <div className="max-w-2xl mx-auto mb-16 space-y-6">
+          <div className="max-w-2xl mx-auto mb-16 space-y-6 relative z-10">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
