@@ -8,6 +8,7 @@ import { useCart, CartItem } from "@/lib/cart";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { SizeGuide } from "@/components/sections/SizeGuide";
 
 export default function OffersPage() {
   const offerItems = PRODUCTS.filter(p => p.onOffer);
@@ -236,6 +237,9 @@ export default function OffersPage() {
               >
                 {selectedProduct?.status === "Sold Out" ? "Sold Out" : "Add to Cart"}
               </Button>
+              <div className="flex justify-center pt-2">
+                <SizeGuide />
+              </div>
             </div>
           </div>
         </DialogContent>

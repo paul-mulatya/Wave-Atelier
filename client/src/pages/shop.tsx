@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SizeGuide } from "@/components/sections/SizeGuide";
 
 export default function ShopPage() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -240,6 +241,9 @@ export default function ShopPage() {
               >
                 {selectedProduct?.status === "Sold Out" ? "Sold Out" : "Add to Cart"}
               </Button>
+              <div className="flex justify-center pt-2">
+                <SizeGuide />
+              </div>
             </div>
           </div>
         </DialogContent>

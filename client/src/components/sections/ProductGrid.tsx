@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
 import { Link } from "wouter";
+import { SizeGuide } from "./SizeGuide";
 
 export function ProductGrid() {
     const [selectedProduct, setSelectedProduct] = useState<null | typeof PRODUCTS[0]>(null);
@@ -256,9 +257,9 @@ export function ProductGrid() {
               >
                 {selectedProduct?.status === "Sold Out" ? "Sold Out" : "Add to Cart"}
               </Button>
-              <Button variant="outline" className="w-full rounded-none h-14 uppercase tracking-widest text-xs font-bold">
-                Size Guide
-              </Button>
+              <div className="flex justify-center pt-2">
+                <SizeGuide />
+              </div>
             </div>
           </div>
         </DialogContent>
