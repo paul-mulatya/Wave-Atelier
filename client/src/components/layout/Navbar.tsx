@@ -3,8 +3,9 @@ import { Link } from "wouter";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { BRAND } from "@/lib/data";
+import { BRAND, PRODUCTS } from "@/lib/data";
 import { useCart, CartItem } from "@/lib/cart";
+import { SearchDialog } from "./SearchDialog";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,7 +53,14 @@ export function Navbar() {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
+          <SearchDialog onProductClick={(product) => {
+            // This will be handled by the page's openProduct function if passed down
+            // For now, we'll navigate to shop if not on shop page or use a custom event
+            const event = new CustomEvent('openProduct', { detail: product });
+            window.dispatchEvent(event);
+          }} />
+          
           <Button 
             variant="ghost" 
             size="icon" 

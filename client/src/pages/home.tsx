@@ -6,14 +6,52 @@ import { Collections } from "@/components/sections/Collections";
 import { ProductGrid } from "@/components/sections/ProductGrid";
 import { Footer } from "@/components/sections/Footer";
 import { CartDrawer } from "@/components/layout/CartDrawer";
-import { MAIN_HERO_IMAGE } from "@/lib/data";
+import { MAIN_HERO_IMAGE, PRODUCTS } from "@/lib/data";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { useCart } from "@/lib/cart";
 
 export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMobileViewingImages, setIsMobileViewingImages] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<string>("M");
+  const { addItem, setIsOpen: setCartOpen } = useCart();
+
+  useEffect(() => {
+    const handleOpenProduct = (e: any) => {
+      const product = e.detail;
+      setSelectedProduct(product);
+      setCurrentImageIndex(0);
+      setIsMobileViewingImages(false);
+      setSelectedSize(product.availableSizes ? product.availableSizes[0] : "M");
+    };
+
+    window.addEventListener('openProduct', handleOpenProduct);
+    return () => window.removeEventListener('openProduct', handleOpenProduct);
+  }, []);
+
+  const handleAddToCart = () => {
+    if (selectedProduct) {
+      addItem(selectedProduct, selectedSize);
+      setSelectedProduct(null);
+      setCartOpen(true);
+    }
+  };
+
+  const nextImage = () => {
+    if (!selectedProduct) return;
+    setCurrentImageIndex((prev) => (prev + 1) % selectedProduct.images.length);
+  };
+
+  const prevImage = () => {
+    if (!selectedProduct) return;
+    setCurrentImageIndex((prev) => (prev - 1 + selectedProduct.images.length) % selectedProduct.images.length);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,6 +94,107 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
+        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] md:h-[80vh] p-0 border-none bg-black overflow-hidden flex flex-col md:flex-row rounded-none">
+          <DialogTitle className="sr-only">Product Details</DialogTitle>
+          
+          <div className={`relative flex-[1.5] bg-neutral-900 flex items-center justify-center overflow-hidden h-[50vh] md:h-full group ${isMobileViewingImages ? 'block' : 'hidden md:flex'}`}>
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentImageIndex}
+                src={selectedProduct?.images[currentImageIndex]}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="w-full h-full object-contain"
+              />
+            </AnimatePresence>
+
+            {selectedProduct && selectedProduct.images.length > 1 && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/10 z-20"
+                  onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                >
+                  <ChevronLeft className="h-8 w-8" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/10 z-20"
+                  onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                >
+                  <ChevronRight className="h-8 w-8" />
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="absolute top-4 left-4 md:hidden rounded-none uppercase tracking-widest text-[10px] font-bold"
+                  onClick={() => setIsMobileViewingImages(false)}
+                >
+                  Back to Details
+                </Button>
+              </>
+            )}
+          </div>
+
+          <div className={`w-full md:w-80 bg-background p-8 flex flex-col h-full overflow-y-auto ${isMobileViewingImages ? 'hidden md:flex' : 'flex'}`}>
+            <button 
+              onClick={() => setSelectedProduct(null)}
+              className="absolute top-4 right-4 text-foreground/50 hover:text-foreground md:hidden"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            
+            <div className="mb-8">
+              <p className="text-xs text-muted-foreground uppercase tracking-widest mb-2">
+                {selectedProduct?.collection}
+              </p>
+              <h2 className="font-serif text-3xl mb-4">{selectedProduct?.name}</h2>
+              <div className="flex items-center gap-3 mb-6">
+                {selectedProduct?.onOffer ? (
+                  <>
+                    <span className="text-muted-foreground line-through text-sm">
+                      KES {selectedProduct?.price.toLocaleString()}
+                    </span>
+                    <span className="text-xl font-bold text-primary italic">
+                      KES {selectedProduct?.discountPrice?.toLocaleString()}
+                    </span>
+                  </>
+                ) : (
+                  <p className="text-xl font-medium">
+                    KES {selectedProduct?.price.toLocaleString()}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-auto pt-8 space-y-4">
+              <Button 
+                variant="outline"
+                className="w-full rounded-none h-14 uppercase tracking-widest text-xs font-bold md:hidden"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMobileViewingImages(true);
+                }}
+              >
+                View Images
+              </Button>
+              <Button 
+                className="w-full rounded-none h-14 bg-primary text-white hover:bg-primary/90 uppercase tracking-widest text-xs font-bold"
+                onClick={handleAddToCart}
+                disabled={!!selectedProduct?.status && selectedProduct.status === "Sold Out"}
+              >
+                {selectedProduct?.status === "Sold Out" ? "Sold Out" : "Add to Cart"}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
