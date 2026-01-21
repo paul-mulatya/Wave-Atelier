@@ -66,6 +66,13 @@ export function Footer() {
                 </svg>
               </a>
               <a 
+                href={`tel:+254759556794`} 
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors" 
+                title="Call Us"
+              >
+                <Phone className="w-5 h-5" />
+              </a>
+              <a 
                 href={`https://wa.me/${BRAND.phone.replace(/\D/g, '')}`} 
                 target="_blank" 
                 rel="noopener noreferrer" 
