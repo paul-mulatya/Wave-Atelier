@@ -4,14 +4,21 @@ import { useCart, getCartTotal, CartItem } from "@/lib/cart";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import { useLocation } from "wouter";
 
 import { BRAND } from "@/lib/data";
 
 export function CartDrawer() {
   const { items, isOpen, setIsOpen, updateQuantity, removeItem } = useCart();
+  const [, setLocation] = useLocation();
 
   const itemCount = items.reduce((acc: number, item: CartItem) => acc + item.quantity, 0);
   const total = getCartTotal(items);
+
+  const handleStartShopping = () => {
+    setIsOpen(false);
+    setLocation("/shop");
+  };
 
   const handleCheckout = () => {
     const phoneNumber = BRAND.phone.replace(/\D/g, "");
@@ -46,7 +53,7 @@ export function CartDrawer() {
               <Button 
                 variant="outline" 
                 className="rounded-none uppercase tracking-widest text-xs font-bold"
-                onClick={() => setIsOpen(false)}
+                onClick={handleStartShopping}
               >
                 Start Shopping
               </Button>
