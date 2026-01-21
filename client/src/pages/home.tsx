@@ -161,6 +161,35 @@ export default function Home() {
               <X className="h-6 w-6" />
             </button>
             
+            {/* Mobile Image Preview */}
+            <div className="md:hidden mb-6 aspect-[3/4] overflow-hidden bg-secondary relative group/mobile">
+              <img 
+                src={selectedProduct?.images[currentImageIndex]} 
+                alt={selectedProduct?.name}
+                className="w-full h-full object-cover"
+              />
+              {selectedProduct && selectedProduct.images.length > 1 && (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-black/20 hover:bg-black/40 z-10"
+                    onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-black/20 hover:bg-black/40 z-10"
+                    onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </Button>
+                </>
+              )}
+            </div>
+
             <div className="mb-8">
               <p className="text-xs text-muted-foreground uppercase tracking-widest mb-2">
                 {selectedProduct?.collection}
