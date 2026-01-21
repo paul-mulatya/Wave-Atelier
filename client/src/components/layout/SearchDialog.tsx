@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { PRODUCTS } from "@/lib/data";
-import { Search, X } from "lucide-react";
+import { Search, X, ChevronLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
@@ -39,9 +39,17 @@ export function SearchDialog({ onProductClick }: SearchDialogProps) {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px] h-[70vh] flex flex-col p-0 gap-0 rounded-none border-none">
-        <DialogHeader className="p-4 border-b">
+        <DialogHeader className="p-4 border-b flex flex-row items-center gap-2 space-y-0">
           <DialogTitle className="sr-only">Search Products</DialogTitle>
-          <div className="flex items-center gap-2">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="md:hidden" 
+            onClick={() => setOpen(false)}
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </Button>
+          <div className="flex-1 flex items-center gap-2">
             <Search className="w-5 h-5 text-muted-foreground" />
             <Input
               placeholder="Search our collection..."
@@ -51,6 +59,14 @@ export function SearchDialog({ onProductClick }: SearchDialogProps) {
               autoFocus
             />
           </div>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => setOpen(false)}
+            className="hidden md:flex"
+          >
+            <X className="w-5 h-5" />
+          </Button>
         </DialogHeader>
         <div className="flex-1 overflow-y-auto p-4">
           {query && results.length === 0 ? (

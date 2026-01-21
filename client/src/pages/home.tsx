@@ -6,17 +6,18 @@ import { Collections } from "@/components/sections/Collections";
 import { ProductGrid } from "@/components/sections/ProductGrid";
 import { Footer } from "@/components/sections/Footer";
 import { CartDrawer } from "@/components/layout/CartDrawer";
-import { MAIN_HERO_IMAGE, PRODUCTS } from "@/lib/data";
+import { MAIN_HERO_IMAGE, PRODUCTS, Product } from "@/lib/data";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useCart } from "@/lib/cart";
+import { SizeGuide } from "@/components/sections/SizeGuide";
 
 export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMobileViewingImages, setIsMobileViewingImages] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string>("M");
@@ -138,6 +139,16 @@ export default function Home() {
                 >
                   Back to Details
                 </Button>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {selectedProduct.images.map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                        idx === currentImageIndex ? "bg-white" : "bg-white/30"
+                      }`}
+                    />
+                  ))}
+                </div>
               </>
             )}
           </div>
@@ -191,6 +202,9 @@ export default function Home() {
               >
                 {selectedProduct?.status === "Sold Out" ? "Sold Out" : "Add to Cart"}
               </Button>
+              <div className="flex justify-center pt-2">
+                <SizeGuide />
+              </div>
             </div>
           </div>
         </DialogContent>
