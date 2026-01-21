@@ -54,16 +54,9 @@ export default function ShopPage() {
               The Full Experience
             </span>
             <h1 className="font-serif text-5xl md:text-7xl mb-6 text-primary">Our Collection</h1>
-            <p className="text-muted-foreground font-light text-xl max-w-2xl mx-auto italic mb-12">
+            <p className="text-muted-foreground font-light text-xl max-w-2xl mx-auto italic">
               Modern African Luxury
             </p>
-            <div className="max-w-md mx-auto relative group">
-              <input 
-                type="text" 
-                placeholder="Search here" 
-                className="w-full bg-transparent border-b border-border py-4 px-2 text-sm focus:outline-none focus:border-primary transition-colors text-center uppercase tracking-widest font-light"
-              />
-            </div>
           </header>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
