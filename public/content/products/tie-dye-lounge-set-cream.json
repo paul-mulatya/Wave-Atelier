@@ -1,0 +1,19 @@
+{
+  "id": 4,
+  "name": "Tie-Dye Lounge Set Cream(men pants)",
+  "price": 3500,
+  "discountPrice": 2975,
+  "category": "Streetwear",
+  "collection": "Clean Aesthetic",
+  "image": "/assets/1000280946_1768329375977.jpg",
+  "images": [
+    "/assets/1000280945_1768329375976.jpg",
+    "/assets/1000280946_1768329375977.jpg",
+    "/assets/IMG-20260113-WA0379(1)_1768331516354.jpg",
+    "/assets/IMG-20260113-WA0395_1768331516356.jpg",
+    "/assets/IMG-20260113-WA0373(1)_1768331516357.jpg"
+  ],
+  "isNew": true,
+  "onOffer": true,
+  "availableSizes": ["M"]
+}

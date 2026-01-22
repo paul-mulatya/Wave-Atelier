@@ -1,22 +1,27 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { PRODUCTS, Product } from "@/lib/data";
+import { loadProducts, Product } from "@/lib/data";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { useCart } from "@/lib/cart";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SizeGuide } from "@/components/sections/SizeGuide";
 
 export default function ShopPage() {
+  const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMobileViewingImages, setIsMobileViewingImages] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string>("M");
   const { addItem, setIsOpen } = useCart();
+
+  useEffect(() => {
+    loadProducts().then(setProducts);
+  }, []);
 
   const openProduct = (product: Product) => {
     setSelectedProduct(product);
@@ -60,7 +65,7 @@ export default function ShopPage() {
           </header>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
-            {PRODUCTS.map((product, idx) => (
+            {products.map((product, idx) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -177,7 +182,6 @@ export default function ShopPage() {
               <X className="h-6 w-6" />
             </button>
             
-            {/* Mobile Image Preview */}
             <div className="md:hidden mb-6 aspect-[3/4] overflow-hidden bg-secondary relative group/mobile">
               <img 
                 src={selectedProduct?.images[currentImageIndex]} 

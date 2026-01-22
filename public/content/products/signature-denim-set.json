@@ -1,0 +1,18 @@
+{
+  "id": 2,
+  "name": "Signature Denim Set(men's pants)",
+  "price": 6500,
+  "discountPrice": 5525,
+  "category": "Sets",
+  "collection": "Vintage Revival",
+  "image": "/assets/1000280941_1768329361259.jpg",
+  "images": [
+    "/assets/1000280940_1768329361258.jpg",
+    "/assets/1000280941_1768329361259.jpg",
+    "/assets/IMG-20260113-WA0340_1768332934220.jpg",
+    "/assets/IMG-20260113-WA0336_1768332934222.jpg"
+  ],
+  "isNew": true,
+  "onOffer": true,
+  "availableSizes": ["L"]
+}

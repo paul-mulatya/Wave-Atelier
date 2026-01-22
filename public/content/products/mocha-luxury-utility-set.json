@@ -1,0 +1,15 @@
+{
+  "id": 9,
+  "name": "Mocha Luxury Utility Set",
+  "price": 6000,
+  "discountPrice": 5100,
+  "category": "Sets",
+  "collection": "Vintage Revival",
+  "image": "/assets/IMG-20260113-WA0409(1)_1768421855154.jpg",
+  "images": [
+    "/assets/IMG-20260113-WA0409(1)_1768421855154.jpg"
+  ],
+  "isNew": true,
+  "onOffer": true,
+  "status": "Sold Out"
+}

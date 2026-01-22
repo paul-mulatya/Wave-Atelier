@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { PRODUCTS } from "@/lib/data";
+import { Product } from "@/lib/data";
 
-export function Offers() {
-  const offerItems = PRODUCTS.filter(p => p.onOffer);
+interface OffersProps {
+  products: Product[];
+}
+
+export function Offers({ products }: OffersProps) {
+  const offerItems = products.filter(p => p.onOffer);
   
   return (
     <section className="py-24 bg-primary/5 border-y border-primary/10">
@@ -37,7 +41,6 @@ export function Offers() {
               </div>
               <div className="h-12 w-px bg-primary/20" />
               <div className="relative group/btn">
-                {/* Pointing Arrows */}
                 <div className="absolute -left-12 top-1/2 -translate-y-1/2 flex gap-1 pointer-events-none">
                   {[0, 1, 2].map((i) => (
                     <motion.div
@@ -102,11 +105,13 @@ export function Offers() {
           >
             <div className="relative w-full aspect-[4/5] max-w-md group">
               <div className="absolute inset-0 bg-primary/10 -translate-x-4 translate-y-4 transition-transform group-hover:translate-x-0 group-hover:translate-y-0" />
-              <img 
-                src={offerItems[0]?.image} 
-                alt="Limited Offer" 
-                className="w-full h-full object-cover relative z-10 grayscale hover:grayscale-0 transition-all duration-700"
-              />
+              {offerItems.length > 0 && (
+                <img 
+                  src={offerItems[0]?.image} 
+                  alt="Limited Offer" 
+                  className="w-full h-full object-cover relative z-10 grayscale hover:grayscale-0 transition-all duration-700"
+                />
+              )}
               <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary rounded-full flex items-center justify-center text-white z-20 animate-pulse">
                 <div className="text-center">
                   <span className="block text-2xl font-serif font-bold italic">15%</span>

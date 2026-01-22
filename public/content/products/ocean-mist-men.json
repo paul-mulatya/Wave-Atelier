@@ -1,0 +1,19 @@
+{
+  "id": 10,
+  "name": "Ocean Mist Men",
+  "price": 7500,
+  "discountPrice": 6375,
+  "category": "Streetwear",
+  "collection": "Clean Aesthetic",
+  "image": "/assets/IMG-20260113-WA0389_1768420723498.jpg",
+  "images": [
+    "/assets/IMG-20260113-WA0389_1768420723498.jpg",
+    "/assets/IMG-20260113-WA0383_1768420741816.jpg",
+    "/assets/1000280948_1768331516354.jpg",
+    "/assets/IMG-20260113-WA0399_1768332934224.jpg",
+    "/assets/IMG-20260113-WA0391_1768332934225.jpg",
+    "/assets/IMG-20260113-WA0381_1768332934228.jpg"
+  ],
+  "isNew": false,
+  "onOffer": true
+}
