@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Product } from "@/lib/data";
+import { PRODUCTS } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -9,18 +9,14 @@ import { useCart } from "@/lib/cart";
 import { Link } from "wouter";
 import { SizeGuide } from "./SizeGuide";
 
-interface ProductGridProps {
-  products: Product[];
-}
-
-export function ProductGrid({ products }: ProductGridProps) {
-    const [selectedProduct, setSelectedProduct] = useState<null | Product>(null);
+export function ProductGrid() {
+    const [selectedProduct, setSelectedProduct] = useState<null | typeof PRODUCTS[0]>(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isMobileViewingImages, setIsMobileViewingImages] = useState(false);
     const [selectedSize, setSelectedSize] = useState<string>("M");
     const { addItem, setIsOpen } = useCart();
   
-    const openProduct = (product: Product) => {
+    const openProduct = (product: typeof PRODUCTS[0]) => {
       setSelectedProduct(product);
       setCurrentImageIndex(0);
       setIsMobileViewingImages(false);
@@ -60,8 +56,9 @@ export function ProductGrid({ products }: ProductGridProps) {
           </Link>
         </div>
         
+        {/* Horizontal scroll on mobile, grid on desktop */}
         <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-8 md:pb-0 scrollbar-hide snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0">
-          {products.map((product, idx) => (
+          {PRODUCTS.map((product, idx) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0 }}
@@ -125,6 +122,7 @@ export function ProductGrid({ products }: ProductGridProps) {
         <DialogContent className="max-w-4xl w-[95vw] h-[90vh] md:h-[80vh] p-0 border-none bg-black overflow-hidden flex flex-col md:flex-row rounded-none">
           <DialogTitle className="sr-only">Product Details</DialogTitle>
           
+          {/* Image Slider */}
           <div className={`relative flex-[1.5] bg-neutral-900 flex items-center justify-center overflow-hidden h-[50vh] md:h-full group ${isMobileViewingImages ? 'block' : 'hidden md:flex'}`}>
             <AnimatePresence mode="wait">
               <motion.img
@@ -156,6 +154,7 @@ export function ProductGrid({ products }: ProductGridProps) {
                 >
                   <ChevronRight className="h-8 w-8" />
                 </Button>
+                {/* Back to details button for mobile image view */}
                 <Button
                   variant="secondary"
                   size="sm"
@@ -178,6 +177,7 @@ export function ProductGrid({ products }: ProductGridProps) {
             )}
           </div>
 
+          {/* Product Info */}
           <div className={`w-full md:w-80 bg-background p-8 flex flex-col h-full overflow-y-auto ${isMobileViewingImages ? 'hidden md:flex' : 'flex'}`}>
             <button 
               onClick={() => setSelectedProduct(null)}
@@ -186,6 +186,7 @@ export function ProductGrid({ products }: ProductGridProps) {
               <X className="h-6 w-6" />
             </button>
             
+            {/* Mobile Image Preview */}
             <div className="md:hidden mb-6 aspect-[3/4] overflow-hidden bg-secondary relative group/mobile">
               <img 
                 src={selectedProduct?.images[currentImageIndex]} 
@@ -238,7 +239,14 @@ export function ProductGrid({ products }: ProductGridProps) {
               <div className="space-y-4 text-sm text-muted-foreground font-light leading-relaxed">
                 <p>
                   Elevated luxury streetwear crafted with precision in Nairobi. 
+                  Designed for the modern mover who values authenticity and timeless silhouettes.
                 </p>
+                <ul className="space-y-2 pt-4">
+                  <li>• Premium African-sourced materials</li>
+                  <li>• Hand-finished detailing</li>
+                  <li>• Relaxed fit for modern comfort</li>
+                </ul>
+
                 <div className="pt-6">
                   <p className="text-xs uppercase tracking-widest mb-3">Select Size</p>
                   <div className="flex flex-wrap gap-2">
