@@ -11,7 +11,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SizeGuide } from "@/components/sections/SizeGuide";
 
-const productFiles = import.meta.glob("/content/products/*.json", { eager: true });
+const productFiles = import.meta.glob("/public/content/products/*.json", { eager: true });
 const PRODUCTS = Object.values(productFiles).map((file: any) => file.default) as Product[];
 
 export default function ShopPage() {
