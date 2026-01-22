@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 
 const faqs = [
   {
@@ -77,14 +78,12 @@ export default function FAQsPage() {
               We're here to help! Reach out to us directly via WhatsApp or Phone.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="https://wa.me/254759556794" 
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link 
+                href="/shop"
                 className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white rounded-none uppercase tracking-widest text-xs font-bold hover:bg-primary/90 transition-colors"
               >
-                Chat on WhatsApp
-              </a>
+                Continue Shopping
+              </Link>
               <a 
                 href="tel:+254759556794"
                 className="inline-flex items-center justify-center px-8 py-3 border border-primary text-primary rounded-none uppercase tracking-widest text-xs font-bold hover:bg-primary/5 transition-colors"
