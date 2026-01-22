@@ -43,43 +43,10 @@ export interface Product {
 export let PRODUCTS: Product[] = [];
 
 export const loadProducts = async (): Promise<Product[]> => {
-  const productFiles = [
-    'earth-tone-maxi-dress.json',
-    'dada-dress.json',
-    'mocha-luxury-utility-set.json',
-    'mbisu-tunic-brown.json',
-    'mbisu-tunic-blue.json',
-    'ocean-mist-women.json',
-    'ocean-mist-men.json',
-    'terracotta-kaftan-maxi.json',
-    'signature-denim-set.json',
-    'tie-dye-lounge-set-cream.json',
-    'wave-classic-hoodie.json'
-  ];
-
-  try {
-    const loadedProducts = await Promise.all(
-      productFiles.map(async (file) => {
-        // Adding a timestamp to bust cache and ensure we get the latest JSON
-        const response = await fetch(`/content/products/${file}?t=${Date.now()}`);
-        if (!response.ok) {
-          throw new Error(`Failed to load ${file}: ${response.status} ${response.statusText}`);
-        }
-        const contentType = response.headers.get("content-type");
-        // In development, sometimes the content-type isn't strictly set for public assets
-        // so we check if it's NOT html which usually indicates a 404/fallback
-        if (contentType && contentType.includes("text/html")) {
-          throw new Error(`Failed to load ${file}: Expected JSON but received HTML (likely a 404)`);
-        }
-        return response.json();
-      })
-    );
-    
-    PRODUCTS = loadedProducts;
-    return loadedProducts;
-  } catch (error) {
-    console.error("Error loading products:", error);
-    // Fallback or rethrow
-    throw error;
-  }
+  const modules = import.meta.glob('/public/content/products/*.json', { eager: true });
+  
+  const loadedProducts = Object.values(modules).map((module: any) => module.default || module) as Product[];
+  
+  PRODUCTS = loadedProducts;
+  return loadedProducts;
 };
