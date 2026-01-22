@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import OffersPage from "@/pages/offers";
+import FAQsPage from "@/pages/faqs";
 
 import ShopPage from "@/pages/shop";
 import ScrollToTop from "@/components/layout/ScrollToTop";
@@ -37,6 +38,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/offers" component={OffersPage} />
         <Route path="/shop" component={ShopPage} />
+        <Route path="/faqs" component={FAQsPage} />
         <Route component={NotFound} />
       </Switch>
     </>

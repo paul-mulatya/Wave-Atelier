@@ -90,6 +90,7 @@ export function Footer() {
         <div className="border-t border-white/10 mt-20 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/40 font-light">
           <p>&copy; 2026 {BRAND.name}. All rights reserved.</p>
           <div className="flex gap-8 mt-4 md:mt-0">
+            <a href="/faqs" className="hover:text-white">FAQs</a>
             <a href="#" className="hover:text-white">Privacy Policy</a>
             <a href="#" className="hover:text-white">Terms of Service</a>
           </div>
