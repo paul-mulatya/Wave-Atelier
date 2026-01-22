@@ -1,0 +1,17 @@
+{
+  "id": 11,
+  "name": "Mbisu Tunic (Blue)",
+  "price": 5000,
+  "discountPrice": 4250,
+  "category": "Dresses",
+  "collection": "Clean Aesthetic",
+  "image": "/src/assets/IMG-20260114-WA0481_1768423819736.jpg",
+  "images": [
+    "/src/assets/IMG-20260114-WA0481_1768423819736.jpg",
+    "/src/assets/IMG-20260114-WA0482_1768423819737.jpg",
+    "/src/assets/IMG-20260114-WA0483_1768423819738.jpg"
+  ],
+  "isNew": true,
+  "onOffer": true,
+  "availableSizes": ["S", "M", "L", "XL"]
+}

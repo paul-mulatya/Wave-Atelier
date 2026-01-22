@@ -1,15 +1,18 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { PRODUCTS, Product } from "@/lib/data";
+import { Product } from "@/lib/data";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { useCart } from "@/lib/cart";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SizeGuide } from "@/components/sections/SizeGuide";
+
+const productFiles = import.meta.glob("/content/products/*.json", { eager: true });
+const PRODUCTS = Object.values(productFiles).map((file: any) => file.default) as Product[];
 
 export default function ShopPage() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);

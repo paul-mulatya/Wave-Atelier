@@ -1,0 +1,17 @@
+{
+  "id": 7,
+  "name": "Earth-Tone Maxi Dress",
+  "price": 5800,
+  "discountPrice": 4930,
+  "category": "Dresses",
+  "collection": "Clean Aesthetic",
+  "image": "/src/assets/1000284326_1768421766867.jpg",
+  "images": [
+    "/src/assets/1000284326_1768421766867.jpg",
+    "/src/assets/1000284327_1768421766868.jpg",
+    "/src/assets/1000284328_1768421766869.jpg",
+    "/src/assets/1000284329_1768421766870.jpg"
+  ],
+  "isNew": true,
+  "onOffer": true
+}

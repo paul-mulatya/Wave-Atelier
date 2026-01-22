@@ -1,0 +1,16 @@
+{
+  "id": 8,
+  "name": "Dada Dress",
+  "price": 3900,
+  "discountPrice": 3315,
+  "category": "Dresses",
+  "collection": "Clean Aesthetic",
+  "image": "/src/assets/1000284340_1768421766870.jpg",
+  "images": [
+    "/src/assets/1000284340_1768421766870.jpg",
+    "/src/assets/1000284341_1768421766872.jpg"
+  ],
+  "isNew": true,
+  "onOffer": true,
+  "availableSizes": ["S", "M", "L", "XL"]
+}
